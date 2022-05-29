@@ -23,7 +23,7 @@ if(!isset($_GET['act'])){
 		<td>
 			<a href="?modul=mod_menu&act=edit&id=<?= $row['idmenu']; ?>" class="btn btn-xs btn-primary p-1"><i
 					class="bi bi-pencil-square"></i>Edit</a>
-			<a href="#" class="btn btn-xs btn-primary p-1">
+			<a href="?modul=mod_menu&act=delete&id=<?= $row['idmenu']; ?>" class="btn btn-xs btn-primary p-1">
 				<i class="bi bi-trash"></i>Delete</a>
 		</td>
 	</tr>
@@ -74,10 +74,14 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 ?>
 <div class="container-fluid">
 	<h3><?php echo $judul; ?></h3>
-	<form action="mod_menu/menuCtrl.php?modul=mod_menu&act=save" method="post">
+	<form action="mod_menu/menuCtrl.php?modul=mod_menu&act=update" method="post">
 		<div class="row mb-1">
 			<label for="" class="col-md-2">Nama Menu</label>
 			<div class="col-md-6">
+				<!-- input type hidden ini untuk menyimpan idmenu sebagai key untuk proses update data
+				kenapa di hidden, karena field sbg primary key tidak boleh di edit -->
+				<input type="hidden" name="txt_idmenu" id="txt_idmenu" class="form-control"
+					value="<?php echo $data['idmenu']; ?>">
 				<input type="text" name="txt_nmmenu" id="txt_nmmenu" class="form-control"
 					value="<?php echo $data['nmmenu']; ?>">
 			</div>

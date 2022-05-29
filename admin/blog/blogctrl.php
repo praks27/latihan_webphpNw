@@ -33,20 +33,18 @@ else if(isset($_GET['act']) && ($_GET['act']== "edit")){
 }
 else if(isset($_GET['act']) && ($_GET['act']== "save")){
 	//jika ada send variabel act=save, ketika proses simpan(insert)
-	$namakategori = $_POST['txt_nmkategori'];
-	if(isset($_POST['ck_aktif'])){
-		$aktif = 1;
-	}
-	else{
-		$aktif = 0;
-	}
+	$kategori = $_POST['txt_kategori'];
+	$judul = $_POST['txt_judul'];
+	$isi = $_POST['txt_isi'];
+	$author = $_POST['author'];
+	$date = $_POST['date_input'];
 	//query untuk simpan
 	$qinsert = mysqli_query($connect_db, 
-			"INSERT into mst_kategoriblog (nm_kategori,is_active) VALUES('$namakategori',$aktif)")
-			or die (mysqli_error($connect_db));
+			"INSERT into mst_blog (judul,id_kategori,isi,author,date_input) VALUES('$kategori','$judul','$isi','$author','$date')")
+			or die ("gagal akses table ".mysqli_error($connect_db));
 	if($qinsert){
 		//ketik proses simpan berhasil
-		header("Location: http://localhost/latihan_webphp1/latihan_webphpNw/admin/home.php?modul=kategori");
+		header("Location:http://localhost/latihan_webphp1/latihan_webphpNw/admin/home.php?modul=blog");
 	}
 }
 else if(isset($_GET['act']) && ($_GET['act']== "update")){
