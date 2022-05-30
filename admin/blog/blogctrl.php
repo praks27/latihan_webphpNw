@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_GET['act']) && ($_GET['act']=="update" || $_GET['act']== "save")){
 	//ketika code ini, posisi ada d folder mod_menu>admin>config
 	require_once "../../config/koneksi_db.php";
@@ -9,12 +9,11 @@ else{
 	require_once "../config/koneksi_db.php";
 	require_once "../config/config.php";
 }
-security_login();
+security_login(); 
 
 if(isset($_GET['act']) && ($_GET['act']== "add")){
 	//jika ada send variabel act=add, tampil form input/tambah
 	$judul = "Form Input Data";
-
 }
 else if(isset($_GET['act']) && ($_GET['act']== "edit")){
 	//jika ada send variabel act=edit, tampil form edit/ubah data
@@ -69,10 +68,10 @@ else if(isset($_GET['act']) && ($_GET['act']== "update")){
 else if(isset($_GET['act']) && ($_GET['act']== "delete")){
 	//jika ada send variabel act=edit, tampil form edit/ubah data
 	$idkey = $_GET['id']; //dapat dari URL
-	$qdelete = mysqli_query($connect_db,"DELETE from mst_kategoriblog where id_kategori=$idkey")
+	$qdelete = mysqli_query($connect_db,"DELETE from mst_blog where id_blog=$idkey")
 				or die(mysqli_error($connect_db));
 	if($qdelete){
-		header("Location: http://localhost/latihan_webphp1/latihan_webphpNw/admin/home.php?modul=kategori");
+		header("Location: http://localhost/latihan_webphp1/latihan_webphpNw/admin/home.php?modul=blog");
 	}
 }
 ?>
