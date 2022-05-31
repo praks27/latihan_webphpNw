@@ -28,7 +28,7 @@
 		while($row = mysqli_fetch_array($qry_menu)){ 
 		?>
 		<li class="list-group-item">
-			<a href="?modul=<?= $row['link']; ?>"><?= $row['nmmenu']; ?></a>
+			<a href="?modul=<?= $row['link']; ?>" class="list-group-item list-group-item-action"><?= $row['nmmenu']; ?></a>
 		</li>
 		<?php } ?>
 	</ul>
