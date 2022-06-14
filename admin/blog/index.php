@@ -1,8 +1,8 @@
-<?php 
+	<?php 
 include_once "blogCTRL.php";
 if(!isset($_GET['act'])){
 //jika tidak ditemukan pengiriman variabel "act"
-?>
+?>	
 <a href="?modul=blog&act=add" class="btn btn-primary btn-xs mb-1">Tambah Data</a>
 <table class="table table-bordered">
 	<tr>
@@ -12,6 +12,8 @@ if(!isset($_GET['act'])){
 		<th>isi</th>
 		<th>author</th>
 		<th>date input</th>
+		<th>gambar</th>
+		<th>action</th>
 	</tr>
 	<?php
 	$qry_listmenu = mysqli_query($connect_db,"select * from mst_blog")
@@ -28,6 +30,7 @@ if(!isset($_GET['act'])){
 		    <td><?= $row['isi']; ?></td>
 		    <td><?= $row['author']; ?></td>
 		    <td><?= $row['date_input']; ?></td>
+		    <td><img src="../assets/img/<?=$row['gambar'];?>" width="250px"></td>
 		    <td>
 			    <a href="?modul=blog&act=edit&id=<?= $row['id_blog']; ?>" class="btn btn-xs btn-primary p-1"><i
 				    	class="bi bi-pencil-square"></i>Edit</a>
@@ -47,7 +50,7 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 ?>
 <div class="container-fluid">
 	<h3><?php echo $judul; ?></h3>
-	<form action="blog/blogCTRL.php?modul=blog&act=save" method="post">
+	<form action="blog/blogCTRL.php?modul=blog&act=save" method="post" enctype="multipart/form-data">
 		<div class="row mb-1">
 			<label for="" class="col-md-2">judul</label>
 			<div class="col-md-6">
@@ -81,6 +84,12 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 				<input type="date" name="date_input" id="date_input" class="form-control ">
 			</div>
 		</div>
+		<div class="row mb-1">
+			<label for="" class="col-md-2">Upload Gambar</label>
+			<div class="col-md-6">
+				<input type="file" name="upload" id="upload" class="form-control">
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
@@ -98,7 +107,7 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 ?>
 <div class="container-fluid">
 	<h3><?php echo $judul; ?></h3>
-	<form action="blog/blogCTRL.php?modul=blog&act=update" method="post">
+	<form action="blog/blogCTRL.php?modul=blog&act=update" method="post" enctype="multipart/form-data">
 		<div class="row mb-1">
 			<label for="" class="col-md-2">judul</label>
 			<div class="col-md-6">
@@ -157,6 +166,12 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 				<input type="date" name="date_input" id="date_input" class="form-control " value="<?= $data['date_input'] ?>">
 			</div>
 		</div>
+		<div class="row mb-1">
+			<label for="" class="col-md-2">Upload Gambar</label>
+			<div class="col-md-6">
+				<input type="file" name="upload" id="upload" class="form-control"><img src="../assets/img/<?= $data['gambar'];?>" width="240px">
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
@@ -168,4 +183,5 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 		</div>
 	</form>
 </div>
+<script type="text/javascript" src="../../assets/bootstrap5/js/bootstrap.bundle.min.js"></script>  
 <?php } ?>

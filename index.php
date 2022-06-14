@@ -13,22 +13,42 @@ require_once("config/config.php");
 	<link rel="stylesheet" href="assets/bootstrap5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="assets/style.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+	<style>
+		.huruf1{
+			font-family: 'Courier New', Courier, monospace;
+			font-weight: bold;
+			color: black;
+		}
+		.huruf2{
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+			font-weight: 600;
+			color: black;
+		}
+		a{
+			text-decoration: none;
+		}
+		a:hover{
+			color: slateblue;
+		}
+		.logo1:hover{
+			color: mediumspringgreen;
+		}
+		.logo2:hover{
+			color: mediumblue;
+		}
+	</style>
 </head>
 
 <body>
-
-	<!-- navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<!-- navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#D3EBCD ;">
 		<div class="container-fluid pe-5 ps-5">
-			<a class="navbar-brand fw-bold" href="index.html">
-				<h3>AniNur's Page</h3>
-			</a>
+				<h2 class="huruf1">GamingMaster Page</h2>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 fontnav">
 					<li class="nav-item">
@@ -46,7 +66,7 @@ require_once("config/config.php");
 							<i class="bi bi-people-fill"></i> Download</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li>
-								<a class="dropdown-item" href="signin.html" target="_blank"> <i
+								<a class="dropdown-item" href="signin.html" target="_blank"><i
 										class="bi bi-file-text"></i> Materi HTML </a>
 							</li>
 							<li>
@@ -65,7 +85,6 @@ require_once("config/config.php");
 			</div>
 		</div>
 	</nav>
-
 	<!-- header -->
 	<header class="bg-white">
 		<div class="container-fluid d-flex justify-content-center align-items-center p-3">
@@ -103,45 +122,28 @@ require_once("config/config.php");
 	<section id="blog" class="bg-white">
 		<div class="container-fluid d-flex flex-column align-items-center p-4">
 			<h1 class="text-primary text-opacity-100 pb-3">=== My Blog ===</h1>
+			<?php
+					$qryblog=mysqli_query($connect_db,"select * from mst_blog");
+					while($qblog=mysqli_fetch_array($qryblog)){ 
+				?>
 			<div class="row mb-4">
 				<div class="col-md-2"></div>
 				<div class="col-md-2">
-					<img src="assets/images/gambar1.jpg" width="270" class="img-fluid img-thumbnail" />
+					<img src="assets/img/<?= $qblog['gambar'];?>" width="270" class="img-fluid img-thumbnail" />
 				</div>
 				<div class="col-md-6">
-					<h4>Judul Artikel-1</h4>
+					<h4><?= $qblog['judul'];?></h4>
 					<div>
-						<span class="badge bg-info text-white rounded-3 fs-6">10/11/2011</span>
-						<span class="text-primary fs-6">Created By : Aninur</span>
+						<span class="badge bg-info text-white rounded-3 fs-6"><?=$qblog['date_input']; ?></span>
+						<span class="text-primary fs-6">Created By : <?=$qblog['author']; ?></span>
 					</div>
 					<p>
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores fugit quod cumque provident
-						quasi! Ut minus veritatis sed atque, aut
-						modi fugit? Veniam quos voluptatum harum cumque vero, numquam dolore! [ <a
-							href="detailblog1.html">Baca Selengkapnya</a> ]
+						<?=substr( $qblog['isi'],0,200);?>
+						<a	href="detailblog.php?id=<?= $qblog['id_blog'];?>">Baca Selengkapnya</a> 
 					</p>
 					<hr />
 				</div>
-			</div>
-			<div class="row mb-4">
-				<div class="col-md-2"></div>
-				<div class="col-md-2">
-					<img src="assets/images/gambar1.jpg" width="270" class="img-fluid img-thumbnail" />
-				</div>
-				<div class="col-md-6">
-					<h4>Judul Artikel-2</h4>
-					<div>
-						<span class="badge bg-info text-white rounded-3 fs-6">10/11/2011</span>
-						<span class="text-primary fs-6">Created By : Aninur</span>
-					</div>
-					<p>
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores fugit quod cumque provident
-						quasi! Ut minus veritatis sed atque, aut
-						modi fugit? Veniam quos voluptatum harum cumque vero, numquam dolore! [ <a
-							href="detailblog2.html">Baca Selengkapnya</a> ]
-					</p>
-					<hr />
-				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</section>
@@ -192,28 +194,29 @@ require_once("config/config.php");
 			</div>
 		</div>
 	</section>
+
 	<!-- footer -->
-	<footer class="bg-info bg-opacity-100">
+	<footer style="background-color:#D3EBCD ; ">
 		<div class="container-fluid d-flex justify-content-center text-white p-3">
-			<span class="me-5 pe-5 fs-6">
+			<span class="me-5 pe-5 fs-6 text-dark">
 				<address class="fw-bold">Head Office :</address>
 				<p>Jalan Medan Merdeka Barat No. 9 Jakarta Pusat 10110 DKI Jakarta, Indonesia</p>
-				<p>Telepon : 081-319301-010</p>
-				<p>Emai : aninur.h@gmail.com</p>
+				<p>Telepon : 0857-0809-9114</p>
+				<p>Email : gamingmaster456798@gmail.com</p>
 			</span>
-			<span class="ms-5">
+			<span class="ms-5 text-dark">
 				<address class="fw-bold">Social Media</address>
 				<p>
-					<a href="http://" target="_blank" rel="noopener noreferrer"><i
-							class="bi bi-whatsapp iconsize"></i></a> Whatsapp
+					<a href="http://" target="_blank" rel="noopener noreferrer" class="huruf2 logo1"><i
+							class="bi bi-whatsapp iconsize "></i> Whatsapp</a>
 				</p>
 				<p>
-					<a href="http://" target="_blank" rel="noopener noreferrer"><i
-							class="bi bi-instagram iconsize"></i></a> Instagram
+					<a href="http://" target="_blank" rel="noopener noreferrer" class="huruf2"><i
+							class="bi bi-instagram iconsize"></i> Instagram</a> 
 				</p>
 				<p>
-					<a href="http://" target="_blank" rel="noopener noreferrer"><i
-							class="bi bi-facebook iconsize"></i></a> Facebook
+					<a href="http://" target="_blank" rel="noopener noreferrer" class="huruf2 logo2"><i
+							class="bi bi-facebook iconsize"></i> Facebook</a> 
 				</p>
 			</span>
 		</div>
