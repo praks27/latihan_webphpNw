@@ -148,32 +148,33 @@ require_once("config/config.php");
 		</div>
 	</section>
 	<!-- contact us -->
-	<section id="contactus" class="bg-light">
+		<section id="contactus" class="bg-light">
 		<div class="container p-4">
 			<h1 class="text-primary text-opacity-100 text-center pb-3">=== Contact Us ===</h1>
 			<div class="row">
 				<div class="col col-lg-2"></div>
 				<div class="col col-lg-7">
-					<form action="#">
+					<form action="#" method="POST" id="formkores">
 						<div class="row mb-3">
 							<label for="staticEmail" class="col-md-3 form-label">Email</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" id="staticEmail" value="email@example.com" />
+								<input type="text" class="form-control" id="email" value="email@example.com" name="email" />
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label for="nama`" class="col-md-3 form-label">Nama Lengkap</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" id="nama" />
+								<input type="text" class="form-control" id="nama" name="nm_lengkap"/>
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label for="info" class="col-md-3 form-label">Informasi</label>
 							<div class="col-md-9">
-								<select name="info" id="info" class="form-select">
-									<option value="">Sharing Artikel</option>
-									<option value="">Penawaran Kerja</option>
-									<option value="">Lain-lain</option>
+								<select name="blog" id="blog" class="form-select">
+									<option selected disabled>-- pilih Blog --</option>
+									<option value="Sharing Artikel">Sharing Artikel</option>
+                                    <option value="Penawaran Kerja">Penawaran Kerja</option>
+                                    <option value="Lain Lain">Lain-lain</option>
 								</select>
 							</div>
 						</div>
@@ -185,8 +186,8 @@ require_once("config/config.php");
 						</div>
 						<div class="row mb-3">
 							<div class="col-md-9 text-center">
-								<button class="btn btn-primary btn-sm"><i class="bi bi-envelope"></i> Simpan</button>
-								<button class="btn btn-secondary btn-sm"><i class="bi bi-reply"></i> Batal</button>
+								<button type="button" class="btn btn-primary btn-sm" id="btnsimpan" data-bs-toggle="modal"><i class="bi bi-envelope" ></i> Simpan</button>
+								<button type="cancel" class="btn btn-secondary btn-sm"><i class="bi bi-reply"></i> Batal</button>
 							</div>
 						</div>
 					</form>
@@ -194,7 +195,25 @@ require_once("config/config.php");
 			</div>
 		</div>
 	</section>
-
+<!-- modal -->
+<div class="modal" tabindex="-1"  id="konfirmasi">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">konfirmasi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>apakah anda  yakin ingin menyimpan data ?
+		</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnyes" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<!-- footer -->
 	<footer style="background-color:#D3EBCD ; ">
 		<div class="container-fluid d-flex justify-content-center text-white p-3">
@@ -221,6 +240,9 @@ require_once("config/config.php");
 			</span>
 		</div>
 	</footer>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="proses.js"></script>
 	<!-- include file bootstrap js -->
 	<script src="assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
 </body>

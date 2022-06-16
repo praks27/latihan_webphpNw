@@ -34,19 +34,39 @@ else if(isset($_GET['act']) && ($_GET['act']== "save")){
     $isi=$_POST['isi'];
     $date=$_POST['date_input'];
 	// $img=$_POST['upload'];
-	 if(isset($_POST['btnsimpan'])){
 		 $img=$_FILES['upload'];
-		 $file=$img['name'];
+		//  $file=$img['name'];
 		 $targetfol="../../assets/img/";
 		 $targetfile=$targetfol.$img['name'];
 		 $type_file=pathinfo($img['name'],PATHINFO_EXTENSION);
-		 move_uploaded_file($img['tmp_name'],$targetfile);
+
+		 $is_upload=0;
+
+		 if($img['size'] > 1000000){
+			$is_upload=0;
+				header("Location: ../home.php?modul=blog&pesan=size");
+		 }
+		 if($type_file != "jpg"){
+			$is_upload=0;
+				header("Location: ../home.php?modul=blog&pesan=ekstensi");
+		 }
+
+		 $namafile="";
+		 if($is_upload==1){
+			if(move_uploaded_file($img['tmp_name'],$targetfile)){
+				$namafile=$file['name'];
+				mysqli_query($connect_db,"INSERT into mst_blog(judul,id_kategori,author,isi,date_input,gambar) VALUES('$judul','$kategori','$author','$isi','$date','$file')")
+					or die (mysqli_error($connect_db));
+				header("Location:  ../home.php?modul=blog&pesan=sukses");
+			}else{
+				header("Location:  ../home.php?modul=blog&pesan=gagal");
+			}
+		}
 		//  $is_upload=1;
 		// 	if($img['size'] > 1000000){
 		// 		$is_upload=0;
 		// 		echo '<script>alert("ukuran file terlalu besar")</script>';
 		// 	}
-	 }
 
 	//query untuk simpan
 	$qinsert = mysqli_query($connect_db, 

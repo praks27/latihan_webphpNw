@@ -3,6 +3,26 @@ include_once "blogCTRL.php";
 if(!isset($_GET['act'])){
 //jika tidak ditemukan pengiriman variabel "act"
 ?>	
+<?php if(isset($_GET['pesan'])){ ?>
+		<?php if($_GET['pesan']=="sukses") {?>
+			<div class="alert alert-success">
+				berhasil input data 
+			</div>
+		<?php }else if($_GET['pesan']=="gagal") {?>
+			<div class="alert alert-danger">
+				gagal input data
+			</div>
+		<?php }else if($_GET['pesan']=="size") {?>
+			<div class="alert alert-warning">
+				 Ukuran file terlalu besar
+			</div>
+		<?php } else if($_GET['pesan']=="ekstensi") {?>
+			<div class="alert alert-warning">
+				type file anda buka jpg png
+			</div>
+	<?php } ?>
+<?php } ?>
+
 <a href="?modul=blog&act=add" class="btn btn-primary btn-xs mb-1">Tambah Data</a>
 <table class="table table-bordered">
 	<tr>
