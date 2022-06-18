@@ -40,21 +40,29 @@ else if(isset($_GET['act']) && ($_GET['act']== "save")){
 		 $targetfile=$targetfol.$img['name'];
 		 $type_file=pathinfo($img['name'],PATHINFO_EXTENSION);
 
-		 $is_upload=0;
+		 $is_upload=1;
 
-		 if($img['size'] > 1000000){
-			$is_upload=0;
-				header("Location: ../home.php?modul=blog&pesan=size");
-		 }
-		 if($type_file != "jpg"){
-			$is_upload=0;
-				header("Location: ../home.php?modul=blog&pesan=ekstensi");
-		 }
+		//  if($img['size'] > 100000){
+		// 	$is_upload=0;
+		// 		header("Location: ../home.php?modul=blog&pesan=size");
+		//  }
+		//  if($type_file != "jpg"){
+		// 	$is_upload=0;
+		// 		header("Location: ../home.php?modul=blog&pesan=ekstensi");
+		//  }
 
 		 $namafile="";
 		 if($is_upload==1){
 			if(move_uploaded_file($img['tmp_name'],$targetfile)){
 				$namafile=$file['name'];
+				if($img['size'] > 1000000){
+					$is_upload=0;
+						header("Location: ../home.php?modul=blog&pesan=size");
+				 }
+				 if($type_file != "jpg" && $type_file!="png"){
+					$is_upload=0;
+						header("Location: ../home.php?modul=blog&pesan=ekstensi");
+				 }
 				mysqli_query($connect_db,"INSERT into mst_blog(judul,id_kategori,author,isi,date_input,gambar) VALUES('$judul','$kategori','$author','$isi','$date','$file')")
 					or die (mysqli_error($connect_db));
 				header("Location:  ../home.php?modul=blog&pesan=sukses");
@@ -69,13 +77,13 @@ else if(isset($_GET['act']) && ($_GET['act']== "save")){
 		// 	}
 
 	//query untuk simpan
-	$qinsert = mysqli_query($connect_db, 
-			"INSERT into mst_blog(judul,id_kategori,author,isi,date_input,gambar) VALUES('$judul','$kategori','$author','$isi','$date','$file')")
-			or die (mysqli_error($connect_db));
-	if($qinsert){
-		//ketik proses simpan berhasil
-		header("Location: http://localhost/latihan_webphp1/latihan_webphpNw/admin/home.php?modul=blog");
-	}
+	// $qinsert = mysqli_query($connect_db, 
+	// 		"INSERT into mst_blog(judul,id_kategori,author,isi,date_input,gambar) VALUES('$judul','$kategori','$author','$isi','$date','$file')")
+	// 		or die (mysqli_error($connect_db));
+	// if($qinsert){
+	// 	//ketik proses simpan berhasil
+	// 	header("Location: http://localhost/latihan_webphp1/latihan_webphpNw/admin/home.php?modul=blog");
+	// }
 }
 else if(isset($_GET['act']) && ($_GET['act']== "update")){
 	//jika ada send variabel act=update, ketika proses simpan ubah data

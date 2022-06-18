@@ -189,6 +189,8 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 		<div class="row mb-1">
 			<label for="" class="col-md-2">Upload Gambar</label>
 			<div class="col-md-6">
+				<input type="hidden" name="upload" id="upload" class="form-control"><?= $data['gambar'];?>
+				
 				<input type="file" name="upload" id="upload" class="form-control"><img src="../assets/img/<?= $data['gambar'];?>" width="240px">
 			</div>
 		</div>
