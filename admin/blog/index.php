@@ -6,19 +6,27 @@ if(!isset($_GET['act'])){
 <?php if(isset($_GET['pesan'])){ ?>
 		<?php if($_GET['pesan']=="sukses") {?>
 			<div class="alert alert-success">
-				berhasil input data 
+				<b>berhasil input data</b>
 			</div>
 		<?php }else if($_GET['pesan']=="gagal") {?>
 			<div class="alert alert-danger">
-				gagal input data
+				<b>gagal input data</b>
 			</div>
 		<?php }else if($_GET['pesan']=="size") {?>
 			<div class="alert alert-warning">
-				 Ukuran file terlalu besar
+				 <b>Ukuran file terlalu besar</b>
 			</div>
 		<?php } else if($_GET['pesan']=="ekstensi") {?>
 			<div class="alert alert-warning">
-				type file anda buka jpg png
+				<b>type file anda bukan jpg atau png</b>
+			</div>
+		<?php } else if($_GET['pesan']=="suksesupdate") {?>
+			<div class="alert alert-warning">
+				<b>sukses mengupdate data</b>
+			</div>
+		<?php } else if($_GET['pesan']=="gagalupdate") {?>
+			<div class="alert alert-danger">
+				<b>gagal mengupdate data</b>
 			</div>
 	<?php } ?>
 <?php } ?>
@@ -189,8 +197,7 @@ else if(isset($_GET['act']) && ($_GET['act']== "add")){
 		<div class="row mb-1">
 			<label for="" class="col-md-2">Upload Gambar</label>
 			<div class="col-md-6">
-				<input type="hidden" name="upload" id="upload" class="form-control"><?= $data['gambar'];?>
-				
+				<input type="hidden" name="imguploaded" id="upload" class="form-control" value="<?= $fotolawas?>">
 				<input type="file" name="upload" id="upload" class="form-control"><img src="../assets/img/<?= $data['gambar'];?>" width="240px">
 			</div>
 		</div>
